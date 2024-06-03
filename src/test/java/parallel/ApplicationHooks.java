@@ -3,6 +3,9 @@ package parallel;
 import com.qa.factory.*;
 import com.qa.utils.*;
 import io.cucumber.java.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import org.junit.*;
 import org.openqa.selenium.*;
 
 import java.util.*;
@@ -14,13 +17,20 @@ public class ApplicationHooks {
     private ConfigReader configReader;
     Properties prop;
 
-    @Before(order = 0)
+    @Before(value = "@skip_scenario" , order = 0)
+    public void skip_scenario(Scenario scenario) {
+        System.out.println("skipped scenario is : " +scenario.getName());
+        Assume.assumeTrue(false);
+    }
+
+
+    @Before(order = 1)
     public void getProperty() {
         configReader = new ConfigReader();
         prop = configReader.init_prop();
     }
 
-    @Before(order = 1)
+    @Before(order = 2)
     public void launchBrowser() {
         String browserName = prop.getProperty("browser");
         driverFactory = new DriverFactory();

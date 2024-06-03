@@ -83,7 +83,6 @@
             <version>5.2.3</version>
         </dependency>
 
-
     </dependencies>
 
     <build>
@@ -103,8 +102,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
+                    <includes>-->
+                        <include>**/ParallelRun.java</include>
+                    </includes>
                     <parallel>methods</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <useUnlimitedThreads>false</useUnlimitedThreads>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -114,28 +116,28 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven.failsafe.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <includes>
-                                <!-- UNCOMMENT BELOW LINE - To execute feature files with single runner -->
-                                <include>**/MyTestRunner.java</include>
-                            </includes>
-                            <!-- UNCOMMENT BELOW 3 LINES - To execute using parallel or combination option -->
-                            <parallel>methods</parallel>
-                            <threadCount>4</threadCount>
-                            <perCoreThreadCount>true</perCoreThreadCount>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-failsafe-plugin</artifactId>-->
+            <!--                <version>${maven.failsafe.version}</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <goals>-->
+            <!--                            <goal>integration-test</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <includes>-->
+            <!--                                &lt;!&ndash; UNCOMMENT BELOW LINE - To execute feature files with single runner &ndash;&gt;-->
+            <!--                                <include>**/MyTestRunner.java</include>-->
+            <!--                            </includes>-->
+            <!--                            &lt;!&ndash; UNCOMMENT BELOW 3 LINES - To execute using parallel or combination option &ndash;&gt;-->
+            <!--                            <parallel>methods</parallel>-->
+            <!--                            <threadCount>4</threadCount>-->
+            <!--                            <perCoreThreadCount>true</perCoreThreadCount>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 </project>
